@@ -1,8 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
 import 'package:ecommerce_app_level3/pages/details_screen.dart';
+import 'package:ecommerce_app_level3/pages/shared/appbarcard.dart';
 import 'package:ecommerce_app_level3/pages/shared/colors.dart';
+import 'package:ecommerce_app_level3/provider/Cart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -12,37 +15,43 @@ class Home extends StatefulWidget {
 }
 
 class Plants {
-  String price;
+  double price;
   String location;
   String picture;
+  String name;
+
   Plants({
+    required this.name,
     required this.price,
     required this.picture,
-    this.location = "main branch",
+    this.location = "Main branch",
   });
 }
 
 class _HomeState extends State<Home> {
   List allPlants = [
     Plants(
-        price: "\$12.99",
+        name: "product1",
+        price: 12.99,
         picture: "assets/plant1.jpeg",
         location: "Ilyes Shop"),
-    Plants(price: "\$12.99", picture: "assets/plant2.jpeg"),
-    Plants(price: "\$19.99", picture: "assets/plant3.jpeg"),
-    Plants(price: "\$22.99", picture: "assets/plant4.jpeg"),
-    Plants(price: "\$33.99", picture: "assets/plant5.jpg"),
-    Plants(price: "\$23.99", picture: "assets/plant6.jpg"),
+    Plants(name: "product2", price: 12.99, picture: "assets/plant2.jpeg"),
+    Plants(name: "product3", price: 19.99, picture: "assets/plant3.jpeg"),
+    Plants(name: "product4", price: 22.99, picture: "assets/plant4.jpeg"),
+    Plants(name: "product5", price: 33.99, picture: "assets/plant5.jpg"),
+    Plants(name: "product6", price: 23.99, picture: "assets/plant6.jpg"),
   ];
 
-  List selectedProducts = [
-    Plants(price: "\$12.99", picture: "assets/plant2.jpeg"),
-    Plants(price: "\$22.99", picture: "assets/plant4.jpeg"),
-    Plants(price: "\$23.99", picture: "assets/plant6.jpg"),
-  ];
+  // List selectedProducts = [
+  //   Plants(price: 12.99, picture: "assets/plant2.jpeg"),
+  //   Plants(price: 22.99, picture: "assets/plant4.jpeg"),
+  //   Plants(price: 23.99, picture: "assets/plant6.jpg"),
+  // ];
 
   @override
   Widget build(BuildContext context) {
+    final classInstancee = Provider.of<Cart>(context);
+
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.only(top: 15),
@@ -80,10 +89,11 @@ class _HomeState extends State<Home> {
 // backgroundColor: Color.fromARGB(66, 73, 127, 110),
                     trailing: IconButton(
                         color: Color.fromARGB(255, 62, 94, 70),
-                        onPressed: () {},
+                        onPressed: () {
+                          classInstancee.addtoCart(allPlants[index]);
+                        },
                         icon: Icon(Icons.add)),
-
-                    leading: Text("${allPlants[index].price}"),
+                    leading: Text("\$${allPlants[index].price}"),
                     title: Text(
                       "",
                     ),
@@ -145,31 +155,8 @@ class _HomeState extends State<Home> {
       ),
       appBar: AppBar(
         actions: [
-          Row(
-            children: [
-              Stack(
-                children: [
-                  Positioned(
-                    bottom: 25,
-                    child: Container(
-                        child: Text("0"),
-                        padding: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                            color: BTNpink, shape: BoxShape.circle)),
-                  ),
-                  IconButton(
-                      onPressed: () {}, icon: Icon(Icons.add_shopping_cart)),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 11.0),
-                child: Text(
-                  "\$13",
-                  style: TextStyle(fontSize: 18),
-                ),
-              ),
-            ],
-          ),
+          //here
+          ProductAndPrice()
         ],
         title: Text("Home"),
         backgroundColor: appbarGreen,

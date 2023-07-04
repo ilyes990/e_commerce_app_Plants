@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:ecommerce_app_level3/pages/home.dart';
+import 'package:ecommerce_app_level3/pages/shared/appbarcard.dart';
 import 'package:flutter/material.dart';
 
 import 'shared/colors.dart';
 
+// ignore: must_be_immutable
 class Details extends StatefulWidget {
   Plants product;
   Details({super.key, required this.product});
@@ -21,8 +23,9 @@ class _DetailsState extends State<Details> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Details Screen"),
+        title: Text("Details"),
         backgroundColor: appbarGreen,
+        actions: [ProductAndPrice()],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -34,7 +37,7 @@ class _DetailsState extends State<Details> {
                 height: 11,
               ),
               Text(
-                widget.product.price,
+                "\$ ${widget.product.price}",
                 style: TextStyle(fontSize: 20),
               ),
               SizedBox(

@@ -1,9 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:ecommerce_app_level3/pages/details_screen.dart';
+import 'package:ecommerce_app_level3/pages/chekout.dart';
 import 'package:ecommerce_app_level3/pages/home.dart';
-import 'package:ecommerce_app_level3/pages/login.dart';
-import 'package:ecommerce_app_level3/pages/register.dart';
 import 'package:ecommerce_app_level3/provider/Cart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +22,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Home(),
+        // Details(
+        //   product: Plants(price: "\$19.99", picture: "assets/plant3.jpeg"),
+        // ),
       ),
     );
   }
